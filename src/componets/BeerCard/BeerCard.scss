@@ -1,0 +1,26 @@
+.beer {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 1rem;
+
+  &__img { 
+    text-align: center;
+    height: 200px;
+    margin-bottom: 10px;
+
+    img {
+      max-height: 100%;
+    }
+  }
+
+  &__title {
+    font-size: 24px;
+  }
+  &__tagline {
+    font-size: 18px;
+  }
+  &__abv {
+    margin-top: 40px;
+    font-size: 14px;
+  }
+}
