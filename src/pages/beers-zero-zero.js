@@ -5,7 +5,7 @@ import BeerList from '../componets/BeerList';
 import useListBeers from '../hooks/useListBeers';
 
 const Beers = () => {
-  const { beers, loading, setPage, page } = useListBeers({});
+  const { beers, loading, setPage, page } = useListBeers({ iniAbv: 1 });
 
   return (
     <BeerList

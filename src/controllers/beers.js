@@ -5,8 +5,8 @@ const DATABASE_ITEM_NAME = 'BEERS_FAV'
 const API_BASE_URL = 'https://api.punkapi.com/v2';
 const MAX_ELEMENTS = 325;
 
-async function getBeers(page) {
-  const beers = await easyFetch(`${API_BASE_URL}/beers?page=${page}`);
+async function getBeers(page, maxAbv = 100) {
+  const beers = await easyFetch(`${API_BASE_URL}/beers?abv_lt=${maxAbv}&page=${page}`);
 
   const beersParsed = beers.map(beer => ({
     id: beer.id,
@@ -46,10 +46,22 @@ function isFavourite(id) {
   return idIndex >= 0
 }
 
+function saveFavourites(favourites) {
+  saveItem(DATABASE_ITEM_NAME, favourites);
+}
+
+function loadFavourites() {
+  return new Promise(resolve => resolve(getItem(DATABASE_ITEM_NAME)));
+}
+
+// { success: true, error: '', data: data }
+
 export {
   getBeers,
   isPrevDisabled,
   isNextDisabled,
   toggleFavourite,
-  isFavourite
+  isFavourite,
+  saveFavourites,
+  loadFavourites
 }

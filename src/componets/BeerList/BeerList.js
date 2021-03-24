@@ -1,9 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { getBeers } from '../../controllers/beers';
 import BeerCards from '../BeerCards';
 import BeerTable from '../BeerTable';
 
+const BeerList = ({
+  beers,
+  page,
+  loading,
+  onNextPage,
+  onPrevPage,
+  isPrevDisabled,
+  isNextDisabled
+}) => {
+  const [mode, setMode] = useState('cards');
+
+  const renderBeers = (beers, mode) => {
+    return mode === 'cards' 
+      ? <BeerCards beers={beers}/>
+      : <BeerTable beers={beers} />
+  }
+
+  if (loading) {
+    return <div>loading</div>
+  }
+  return (
+    <div>
+      <div>
+      <button disabled={mode === 'cards'} onClick={() => setMode('cards')}>Cards</button>
+        <button disabled={mode === 'table'} onClick={() => setMode('table')}>Table</button>
+      </div>
+      <div>
+        {loading 
+          ? <div>loading</div>
+          : renderBeers(beers, mode)
+        }
+      </div>
+      <div>
+        <button disabled={isPrevDisabled} onClick={onPrevPage}>Prev</button>
+        <span>{page}</span>
+        <button disabled={isNextDisabled} onClick={onNextPage}>Next</button>
+      </div>
+    </div>
+  )
+}
+/*
 class BeerList extends React.Component {
   constructor(props) {
     super(props);
@@ -59,5 +100,5 @@ class BeerList extends React.Component {
     )
   }
 }
-
+*/
 export default BeerList;
