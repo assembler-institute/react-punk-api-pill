@@ -4,9 +4,13 @@ import { saveItem, getItem } from '../services/database';
 const DATABASE_ITEM_NAME = 'BEERS_FAV'
 const API_BASE_URL = 'https://api.punkapi.com/v2';
 const MAX_ELEMENTS = 325;
+const CACHE = {}
 
 async function getBeers(page, maxAbv = 100) {
-  const beers = await easyFetch(`${API_BASE_URL}/beers?abv_lt=${maxAbv}&page=${page}`);
+  const fetchUrl = `${API_BASE_URL}/beers?abv_lt=${maxAbv}&page=${page}`
+  if (CACHE[fetchUrl]) return CACHE[fetchUrl];
+
+  const beers = await easyFetch(fetchUrl);
 
   const beersParsed = beers.map(beer => ({
     id: beer.id,
@@ -15,6 +19,8 @@ async function getBeers(page, maxAbv = 100) {
     imageUrl: beer.image_url,
     abv: beer.abv
   }))
+
+  CACHE[fetchUrl] = beersParsed;
 
   return beersParsed;
 }

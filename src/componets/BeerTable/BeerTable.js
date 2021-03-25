@@ -1,10 +1,14 @@
-import useFavouriteBeers from '../../hooks/useFavouriteBeers';
+import { useContext } from 'react';
+
+import { CartContext } from '../../contexts/CartContext';
 import Star from '../icons/Star';
+import useFavouriteBeers from '../../hooks/useFavouriteBeers';
 
 import './BeerTable.scss';
 
 const BeerTable = ({ beers }) => {
   const { favourites, toggleFavourite } = useFavouriteBeers();
+  const { onAddProduct } = useContext(CartContext);
 
   return (
     <table>
@@ -26,6 +30,7 @@ const BeerTable = ({ beers }) => {
               <div className="fav_button" onClick={() => toggleFavourite(beer.id)}>
                 <Star color={favourites[beer.id] ? '#ffd04d' : 'grey'}/>
               </div>
+              <button onClick={() => onAddProduct(beer)}>Add to cart</button>
             </td>
           </tr>
         ))}

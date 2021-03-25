@@ -5,7 +5,7 @@ import BeerCard from '../BeerCard';
 const BeerCards = ({ beers }) => (
   <div className="App">
     {beers.map(beer => {
-      return <BeerCard key={beer.id} beer={beer}/>
+      return <BeerCard key={beer.id} beer={beer} />
     })}
   </div>
 );

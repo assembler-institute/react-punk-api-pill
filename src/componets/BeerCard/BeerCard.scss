@@ -32,4 +32,15 @@
       font-size: 14px;
     }
   }
+
+  &.beer_cart {
+    display: flex;
+    max-width: 100%;
+    margin: 0 auto 10px auto;
+
+    .beer__img { 
+      height: 60px;
+      margin-right: 10px;
+    }
+  }
 }
