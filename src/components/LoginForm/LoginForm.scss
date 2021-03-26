@@ -1,0 +1,34 @@
+.login_form {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px 4px lightgrey;
+
+  .login_form__field {
+    margin-bottom: 10px;
+
+    label {
+      display: block;
+    }
+
+    .login_form__error {
+      font-size: 12px;
+      color: red;
+    }
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid black;
+    background-color: white;
+    outline: none;
+    transition: all 0.4s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  }
+}

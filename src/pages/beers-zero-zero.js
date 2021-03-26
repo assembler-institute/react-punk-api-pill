@@ -1,22 +1,25 @@
 import React from 'react';
 
+import MainLayout from '../components/layouts/MainLayout';
 import { isPrevDisabled, isNextDisabled } from '../controllers/beers';
-import BeerList from '../componets/BeerList';
+import BeerList from '../components/BeerList';
 import useListBeers from '../hooks/useListBeers';
 
 const Beers = () => {
   const { beers, loading, setPage, page } = useListBeers({ iniAbv: 1 });
 
   return (
-    <BeerList
-      beers={beers}
-      loading={loading}
-      page={page}
-      onNextPage={() => setPage(page + 1)}
-      onPrevPage={() => setPage(page - 1)}
-      isPrevDisabled={isPrevDisabled(page)}
-      isNextDisabled={isNextDisabled(page)}
-    />
+    <MainLayout>
+      <BeerList
+        beers={beers}
+        loading={loading}
+        page={page}
+        onNextPage={() => setPage(page + 1)}
+        onPrevPage={() => setPage(page - 1)}
+        isPrevDisabled={isPrevDisabled(page)}
+        isNextDisabled={isNextDisabled(page)}
+      />
+    </MainLayout>
   )
 }
 

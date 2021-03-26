@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
-import Cart from './componets/Cart';
+import Cart from './components/Cart';
+import ReduxProvider from './redux/Provider';
 import Beers from './pages/beers';
 import BeersZeroZero from './pages/beers-zero-zero';
+import Login from './pages/login';
 import CartContextProvider from './contexts/CartContext';
 
 const App = () => { 
-  const [page, setPage] = useState('beers');
-
   return (
     <div className="App">
-      <CartContextProvider>
-        <div>
-          <button onClick={() => setPage('beers')}>Beers</button>
-          <button onClick={() => setPage('beers-zero-zero')}>Beers Zero Zero</button>
-        </div>
-        {page === 'beers' ? <Beers /> : <BeersZeroZero/> }
-        <Cart />
-      </CartContextProvider>
+      <ReduxProvider>
+        <CartContextProvider>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={Beers} />
+              <Route exact path="/zero-zero" component={BeersZeroZero} />
+              <Route exact path="/login" component={Login} />
+              <Redirect to="/" />
+            </Switch>
+          </Router>
+          <Cart />
+        </CartContextProvider>
+      </ReduxProvider>
     </div>
   );
 }
