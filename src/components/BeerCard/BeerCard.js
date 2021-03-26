@@ -6,6 +6,8 @@ import useFavouriteBeers from '../../hooks/useFavouriteBeers';
 
 import './BeerCard.scss';
 
+//{ add_to_cart: { es: 'Añadir al carrito', en: 'Add to cart' } }
+
 const BeerCard = ({ beer, type }) => {
   const { id, name, tagline, imageUrl, abv } = beer;
   const { favourites, toggleFavourite } = useFavouriteBeers();
@@ -28,7 +30,7 @@ const BeerCard = ({ beer, type }) => {
               <Star color={favourites[id] ? '#ffd04d' : 'grey'}/>
             </div>
           </div>
-          <button onClick={() => onAddProduct(beer)}>Add to cart</button>
+          <button onClick={() => onAddProduct(beer)}>Add to cart</button> 
         </>
       )}
       {type === 'cart' && (
